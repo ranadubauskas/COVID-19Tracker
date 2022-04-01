@@ -1,0 +1,14 @@
+.about{
+    font-size: 30px;
+    font-family: Garamond, serif;
+}
+.hd{
+    font-weight: bold;
+}
+img{
+    float:right;
+    width: 200px;
+    height: 200px;
+    padding: 0 10px 0 0;
+
+}

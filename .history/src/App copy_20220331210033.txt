@@ -1,0 +1,176 @@
+import React, { useEffect, useState } from "react";
+import 'bootstrap/dist/css/bootstrap.min.css';
+import Card from 'react-bootstrap/Card';
+import CardGroup from 'react-bootstrap/CardGroup';
+import axios from 'axios';
+import "./App.css";
+import Form from 'react-bootstrap/Form';
+import Map from './Map';
+import { BrowserRouter as Router, Routes, Route, Link } from "react-router-dom";
+
+
+<nav className="nav">
+     <ul className="nav-list">
+     <h5 className="h5"> COVID-19 Live Updates </h5>
+          <li><Link to="/" className="link">Home</Link></li>
+          <li><Link to="/Countries" className="link"> Data by Country</Link></li>
+          <li> <Link to="/Map" className="link">Map </Link> </li>
+          <li> <Link to="/About" className="link"> Symptoms </Link></li>
+        </ul>
+        </nav>
+
+nav{
+  
+  justify-content: space-around;
+  align-items: center;
+  min-height: 10vh;
+  background: rgb(73, 79, 82);
+  color: white;
+  font-family: Garamond, serif;
+  font-size: 20px;
+  text-decoration: none !important;
+}
+
+.link {
+  color: #FFF;
+}
+.link:hover {
+  color: dodgerblue;
+}
+.nav-list{
+  width: 40%;
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  list-style: none;
+  color: white;
+}
+
+AIzaSyBEP3aTAxNz_xOdIbK5ulQWCoqlGCUC_uA
+
+function App() {
+  const [latest, setLatest]=useState([]);
+  const [result, setResult]=useState([]);
+  const date = new Date(parseInt(latest.updated));
+  const lastUpdated=date.toString();
+  const [searchCountry, setSearchCountry]=useState("");
+
+
+  useEffect(() => {
+    axios
+    .all([
+    axios.get('https://disease.sh/v3/covid-19/all'),
+    axios.get('https://disease.sh/v3/covid-19/countries')
+    ])
+    .then(responseArr => {
+      setLatest(responseArr[0].data);
+      setResult(responseArr[1].data);
+    })
+    .catch(err => {
+      console.log(err);
+    });
+  }, []);
+
+const filterCountry= result.filter(item=> {
+  return searchCountry!== "" ? item.country.includes(searchCountry) : item;
+});
+
+
+  const countries= filterCountry.map((data, i) => {
+    return (
+    <Card 
+        key={i}
+        bg="light"
+        text="dark"
+        className="text-center"
+        style={{margin: "10px"}}>
+      <Card.Img src={data.countryInfo.flag} alt="Card Image" style={{opacity: 0.5}}/>
+      <Card.ImgOverlay>
+      <Card.Body>
+        <Card.Title> {data.country} </Card.Title>
+        <Card.Text> Cases {data.cases}</Card.Text>
+        <Card.Text> Deaths {data.deaths}</Card.Text>
+        <Card.Text> Recovered {data.recovered}</Card.Text>
+        <Card.Text> Today's Cases {data.todayCases}</Card.Text>
+        <Card.Text> Today's Deaths {data.todayDeaths}</Card.Text>
+      </Card.Body>
+      </Card.ImgOverlay>
+        </Card>
+  );
+});
+
+
+  return (
+    
+    <div className="all">
+      <h1> COVID-19 Live Updates </h1>
+      <ul>
+        <li> 
+          <Link to="/Map"> See Map </Link> 
+        </li>
+        </ul>
+
+      <Router>
+        <Routes>
+      <Route path="/Map" element={<Map />} />
+      </Routes>
+      </Router>
+
+  <CardGroup>
+  <Card bg="primary" text="white" className="text-center" style={{margin: "10px"}}>
+    <Card.Body>
+      <Card.Title>Cases</Card.Title>
+      <Card.Text>
+        {latest.cases}
+      </Card.Text>
+    </Card.Body>
+    <Card.Footer>
+      <small>Last updated {lastUpdated}</small>
+    </Card.Footer>
+  </Card>
+  <Card bg="danger" text="white" className="text-center" style={{margin: "10px"}}>
+    <Card.Body>
+      <Card.Title>Deaths</Card.Title>
+      <Card.Text>
+        {latest.deaths}
+      </Card.Text>
+    </Card.Body>
+    <Card.Footer>
+      <small> Last updated {lastUpdated}</small>
+    </Card.Footer>
+  </Card>
+  <Card bg="success" text="white" className="text-center" style={{margin: "10px"}}>
+    <Card.Body>
+      <Card.Title>Recovered</Card.Title>
+      <Card.Text>
+        {latest.recovered}
+      </Card.Text>
+    </Card.Body>
+    <Card.Footer>
+      <small>Last updated {lastUpdated}</small>
+    </Card.Footer>
+  </Card>
+</CardGroup>
+
+
+<Form className="form">
+  <Form.Group className="search" controlId="formGroupSearch">
+    <Form.Control 
+    type="text" 
+    placeholder="Search a Country" 
+    onChange={e=> setSearchCountry(e.target.value)}
+    />
+  </Form.Group>
+ </Form>
+
+
+
+
+<div className="countries">
+          {countries};
+ </div>
+   </div>
+  );
+};
+
+export default App;
