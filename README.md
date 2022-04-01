@@ -5,9 +5,11 @@ https://gregarious-tarsier-ba7176.netlify.app
 
 ## Features
 - Live updates COVID-19
-- Sorted by Country
+- Data sorted by Country
 - Search feature that filters countries
 - Data including new cases and deaths
+- Google Maps with markers on country data 
+- Symptoms page 
 
 ## Built With
 
@@ -16,6 +18,7 @@ https://gregarious-tarsier-ba7176.netlify.app
 - CSS
 - JavaScript
 - COVID-19 API (https://disease.sh/)
+- Google Maps API
 
 ## Author
 
