@@ -9,7 +9,7 @@ https://gregarious-tarsier-ba7176.netlify.app
 - Search feature that filters countries
 - Data including new cases and deaths
 - Google Maps with markers on country data 
-- Symptoms page 
+- About page with symptoms, treatment, and prevention
 
 ## Built With
 
