@@ -1,6 +1,6 @@
 # COVID-19 Tracker With Live Updates
 
-https://gregarious-tarsier-ba7176.netlify.app
+https://mellifluous-puppy-287516.netlify.app
 
 
 ## Features
