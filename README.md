@@ -4,7 +4,7 @@ https://mellifluous-puppy-287516.netlify.app
 
 
 ## Features
-- Live updates COVID-19
+- Live COVID-19 updates
 - Data sorted by Country
 - Search feature that filters countries
 - Data including new cases and deaths
