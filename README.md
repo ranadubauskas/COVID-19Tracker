@@ -13,7 +13,7 @@ https://mellifluous-puppy-287516.netlify.app
 
 ## Built With
 
-- React.JS
+- ReactJS
 - HTML
 - CSS
 - JavaScript
