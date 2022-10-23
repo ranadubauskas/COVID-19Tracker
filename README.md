@@ -1,6 +1,6 @@
 # COVID-19 Tracker With Live Updates
 
-https://mellifluous-puppy-287516.netlify.app
+https://covid19tracker0.netlify.app
 
 
 ## Features
